@@ -15,6 +15,7 @@ class Home extends Component {
         this._inputBirth = this._inputBirth.bind(this);
         this._inputPIN = this._inputPIN.bind(this);
         this._handlePIN = this._handlePIN.bind(this);
+        //this._redirect = this
     
         this.state = {
           name : "",
@@ -98,6 +99,10 @@ class Home extends Component {
         // state 비동기 문제 잔존
     
         console.log(this.state)
+      }
+
+      _redirect() {
+          return 
       }
     
       render() {
