@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import sha256 from 'sha256';
 
 class App extends Component {
   constructor(props) {
@@ -10,13 +11,17 @@ class App extends Component {
     this._isAuthed = this._isAuthed.bind(this);
     this._inputName = this._inputName.bind(this);
     this._inputNumber = this._inputNumber.bind(this);
-    this._inputDepart = this._inputDepart.bind(this);
+    this._inputBirth = this._inputBirth.bind(this);
+    this._inputPIN = this._inputPIN.bind(this);
 
     this.state = {
       name : "",
       number : "",
-      depart : "",
+      birth : "",
       auth : false,
+      hash1 : 0,
+      pin : "",
+      privateKey : ""
     };
   }
 
@@ -38,37 +43,55 @@ class App extends Component {
     })
   }
 
-  _inputDepart(e){
-    let _depart = e.target.value;
+  _inputBirth(e){
+    let _birth = e.target.value;
     this.setState({
-      depart : _depart
+      birth : _birth
     })
   }
 
   _handleSubmit(){
-    this._isAuthed(this.state.name, this.state.number, this.state.depart);
+    if(this.state.auth===false) {
+      this._isAuthed(this.state.name, this.state.number, this.state.birth);
+    } else {
+      this._handlePIN(this.state.pin)
+    }
   }
   
-  _isAuthed(name, number, depart) {
+  _isAuthed(name, number, birth) {
     let isCert = false;
 
-    if(name!=="" && number!=="" && depart!==""){
+    if(name!=="" && number!=="" && birth!==""){
       isCert = true;
     } else if(name==="" || number==="") {
       alert("hey missed any part!");
     }
 
     if(isCert === true) {
+      let shaed = sha256(this.state.name + this.state.number + this.state.birth)
       this.setState({
-        auth: true
+        auth : true,
+        hash1 : shaed,
       });
     } else {
-      console.log("false");
+      console.log("error");
     }
   }
 
+  _inputPIN(e) {
+    let _pin = e.target.value;
+
+    this.setState({
+      pin : _pin
+    })
+  }
+
+  _handlePIN(pin) {
+
+  }
+
   render() {
-    if(this.state.auth === false){
+    if(this.state.auth === false && this.state.pin === ""){
       return (
         <div className="App">
           <header className="App-header">
@@ -78,14 +101,14 @@ class App extends Component {
             </p>
           </header>
           <div>
-            이름 : <input type="text" onChange={(e)=> {this._inputName(e)}}/>
-            학번 : <input type="text" onChange={(e) => {this._inputNumber(e)}}/>
-            단과대학 : <input type="text" onChange={(e)=>{this._inputDepart(e)}}/>
+            Eng Name : <input type="text" placeholder="ENG" onChange={(e)=> {this._inputName(e)}}/>
+            ID Number : <input type="text" onChange={(e) => {this._inputNumber(e)}}/>
+            birth : <input type="text" placeholder="19960318" onChange={(e)=>{this._inputBirth(e)}}/>
             <input type="button" value="Submit" onClick={this._handleSubmit} />
           </div>
         </div>
       );
-    } else {
+    } else if(this.state.auth === true && this.state.pin === ""){
       return (
         <div className="App">
           <header className="App-header">
@@ -97,6 +120,19 @@ class App extends Component {
           <div>
             You are certified!
           </div>
+          <div>
+            Your first hash : {this.state.hash1}
+          </div>
+          <div>
+            please input PIN number : <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} />
+            <input type="button" value="Submit" onClick={this._handleSubmit} />
+          </div>
+        </div>
+      );
+    } else if(this.state.auth === true && this.state.pin !== "") {
+      return(
+        <div>
+
         </div>
       )
     }
