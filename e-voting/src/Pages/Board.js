@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import 'react-table/react-table.css'
 
 class Board extends Component {
     constructor(props) {
@@ -16,11 +17,12 @@ class Board extends Component {
     render() {
         return(
             <div>
-                <p>Hello It's Board</p> 
-                {this.props.publicKey}
+                <p className="h3" style={{position: "absolute", left: 410, top: 120}} >Hello It's Board</p> 
+                <p className="h3" style={{position: "absolute", left: 410, top: 150}}>{this.props.publicKey}</p>
             </div>
         )
+        }
     }
-}
+    
 
 export default Board;
