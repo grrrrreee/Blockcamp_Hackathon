@@ -120,16 +120,17 @@ class Home extends Component {
                     <input type="button" value="Submit" className= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", right: 755, top: 380}}/>
                 </div>
                 </div>
+                
             </div>
           );
         } else if(this.state.auth === true && this.state.publicKey === ""){
           return (
             <div className="input2">
                 <div>
-                    <p style={{position: "absolute", left: 700, top: 255}} >You are certified!</p>
+                    <p style={{position: "absolute", left: 680, top: 255}} >You are certified!</p>
                 </div>
                 <div>
-                <p style={{position: "absolute", left: 700, top: 285}} >Your first hash: {this.state.hash1}</p>
+                <p style={{position: "absolute", left: 680, top: 285}} >Your first hash: {this.state.hash1}</p>
                 </div>
                 <div>
                     <p style={{position: "absolute", left: 700, top: 310}} >please input PIN number : </p>
