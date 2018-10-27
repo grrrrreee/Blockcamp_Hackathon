@@ -152,9 +152,42 @@ p, .lead {
 }
 
 .h3 {
-  font-size: 16px;
+  font-size: 25px;
   line-height: 25px;
   letter-spacing: 0px;
   color: #231f20;
   font-weight: 700;
+}
+
+.form-control {
+  background-color: rgb(241, 253, 255);
+  background-image: none;
+  border: 0px solid transparent;
+  border-radius: 7.5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  color: #929496;
+  display: block;
+  font-size: 15px;
+  height: 50px;
+  line-height: 1.42857;
+  padding: 2px 50px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
+.form-control::-moz-placeholder {
+  color: #d9d9d9;
+  font-size: 15px;
+  opacity: 1;
+}
+
+.form-control::-webkit-placeholder, .form-control::-o-placeholder {
+  color: #d9d9d9;
+  font-size: 15px;
+  opacity: 1;
+}
+
+.form-control::-o-placeholder {
+  color: #d9d9d9;
+  font-size: 15px;
+  opacity: 1;
 }
