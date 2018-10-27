@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Create from './Create'
 
 class Board extends Component {
     constructor(props) {
         super(props);
 
         this._toCreate = this._toCreate.bind(this);
+        this._inputTitle = this._inputTitle.bind(this);
+        this._inputCand = this._inputCand.bind(this);
+        this._inputCandArr = this._inputCandArr.bind(this);
+        this._createSubmit = this._createSubmit.bind(this);
         
         this.state = {
-            clicked : false
+            clicked : false,
+            title : "",
+            candTemp : "",
+            candidate : [],
         };
     }
 
@@ -35,6 +41,54 @@ class Board extends Component {
         })
     }
 
+    _inputTitle(e){
+        let _title = e.target.value;
+
+        this.setState({
+            title : _title
+        })
+    }
+
+    _inputCand(e){
+        let _cand = e.target.value;
+        
+        this.setState({
+            candTemp : _cand
+        })
+    }
+
+    _inputCandArr(){
+        let _candArr = this.state.candidate;
+        _candArr.push(this.state.candTemp);
+
+        this.setState({
+            candidate : _candArr
+        })
+    }
+
+    _createSubmit(){
+        let _title = this.state.title;
+        let _candidate = this.state.candidate;
+
+        axios({
+            method: 'post',
+            url: '/user/12345',
+            data: {
+              creator: "manager",
+              title : _title,
+              candidate : _candidate
+            }
+          }).then((res) => {
+            console.log(res);
+        });
+        
+        this.setState({
+            title : "",
+            candidate : [],
+            clicked : false
+        })
+    }
+
     render() {
         if(this.state.clicked === false){
             return(
@@ -50,7 +104,20 @@ class Board extends Component {
             )
         } else if(this.state.clicked === true) {
             return(
-                <Create />
+                <div>
+                    <p>Create Page</p>
+                    <input type="text" placeholder="Vote Title" onChange={this._inputTitle} />
+                    <input type="text" placeholder="new cadidate" onChange={this._inputCand} />
+                    <input type="button" value="ADD" onClick={this._inputCandArr}/>
+                    <p>
+                        {this.state.candidate.map((cand) =>
+                            <li key={cand}>{cand}</li> 
+                        )}
+                    </p>
+                    <p>
+                        <input type="button" value="Create!" onClick={this._createSubmit}/>
+                    </p>
+                </div>
             )
         }
         
