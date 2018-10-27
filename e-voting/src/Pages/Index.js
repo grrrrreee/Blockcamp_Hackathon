@@ -10,7 +10,7 @@ class Index extends Component {
         return(
             <div>
                 <Route exact path="/" component={Home}/>
-                <Route path="/board" component={Board}/>
+                <Route path="/board/:key" component={Board}/>
             </div>
         )
     }
