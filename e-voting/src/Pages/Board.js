@@ -39,8 +39,8 @@ class Board extends Component {
         if(this.state.clicked === false){
             return(
                 <div>
-                    <p>Hello It's Board</p> 
-                    {this.props.publicKey}
+                    <p className="h3" style={{position: "absolute", left: 410, top: 120}} >Hello It's Board</p> 
+                    <p className="h3" style={{position: "absolute", left: 410, top: 150}}>{this.props.publicKey}</p>
                     <p>This is your Voting List</p>
                     <div>
                         List
@@ -53,8 +53,7 @@ class Board extends Component {
                 <Create />
             )
         }
-        
     }
-}
+    
 
 export default Board;

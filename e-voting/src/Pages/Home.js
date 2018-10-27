@@ -111,9 +111,9 @@ class Home extends Component {
             <div>
                 <div className="input1">
                 <div>
-                  <p style={{position: "absolute", left: 700, top: 285}} >Name</p>
-                  <p style={{position: "absolute", left: 700, top: 310}} >Student ID</p>
-                  <p style={{position: "absolute", left: 700, top: 335}} >Birth</p>
+                  <p className="h3" style={{position: "absolute", left: 700, top: 285}} >Name</p>
+                  <p className="h3" style={{position: "absolute", left: 700, top: 310}} >Student ID</p>
+                  <p className="h3" style={{position: "absolute", left: 700, top: 335}} >Birth</p>
                     <input type="text" placeholder="ENG" style={{position: "absolute", right: 740, top: 300}}onChange={(e)=> {this._inputName(e)}}/>
                     <input type="text" placeholder="number" style={{position: "absolute", right: 740, top: 325}} onChange={(e) => {this._inputNumber(e)}}/>
                     <input type="text" placeholder="YYYYMMDD" style={{position: "absolute", right: 740, top: 350}} onChange={(e)=>{this._inputBirth(e)}}/>
@@ -127,10 +127,10 @@ class Home extends Component {
           return (
             <div className="input2">
                 <div>
-                    <p style={{position: "absolute", left: 680, top: 255}} >You are certified!</p>
+                    <p className="h3" style={{position: "absolute", left: 580, top: 255}} >You are certified!</p>
                 </div>
                 <div>
-                <p style={{position: "absolute", left: 680, top: 285}} >Your first hash: {this.state.hash1}</p>
+                <p className="h3" style={{position: "absolute", left: 580, top: 285}} >Your first hash: {this.state.hash1}</p>
                 </div>
                 <div>
                     <p style={{position: "absolute", left: 700, top: 310}} >please input PIN number : </p>
