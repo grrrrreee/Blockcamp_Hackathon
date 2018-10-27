@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import sha256 from 'sha256';
 import '../App.css'
-import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom';
-import Board from './Board'
 
 class Home extends Component {
     constructor(props) {
@@ -17,6 +15,7 @@ class Home extends Component {
         this._inputBirth = this._inputBirth.bind(this);
         this._inputPIN = this._inputPIN.bind(this);
         this._handlePIN = this._handlePIN.bind(this);
+        //this._redirect = this
     
         this.state = {
           name : "",
@@ -25,8 +24,7 @@ class Home extends Component {
           auth : false,
           hash1 : 0,
           pin : "",
-          publicKey : "",
-          isReady : false
+          privateKey : ""
         };
       }
     
@@ -92,15 +90,23 @@ class Home extends Component {
       }
     
       _handlePIN() {
-        let _public = sha256(this.state.hash1 + this.state.pin);
+        let _private = sha256(this.state.hash1 + this.state.pin);
+        alert("Your PrivateKey : " + _private + " \n Be Safe!");
         
         this.setState({
-          publicKey : _public
+          privateKey : _private
         })
+        // state 비동기 문제 잔존
+    
+        console.log(this.state)
+      }
+
+      _redirect() {
+          return 
       }
     
       render() {
-        if(this.state.auth === false) {
+        if(this.state.auth === false){
           return (
             <div>
                 <div className="input1">
@@ -111,12 +117,12 @@ class Home extends Component {
                     <input type="text" placeholder="ENG" style={{position: "absolute", left: 800, top: 300}}onChange={(e)=> {this._inputName(e)}}/>
                     <input type="text" style={{position: "absolute", left: 800, top: 325}} onChange={(e) => {this._inputNumber(e)}}/>
                     <input type="text" placeholder="19960318" style={{position: "absolute", left: 800, top: 350}} onChange={(e)=>{this._inputBirth(e)}}/>
-                    <input type="button" value="Submit" class= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", left: 810, top: 380}}/>
+                    <input type="button" value="Submit" class= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", left: 805, top: 380}}/>
                 </div>
                 </div>
             </div>
           );
-        } else if(this.state.auth === true && this.state.publicKey === ""){
+        } else if(this.state.auth === true){
           return (
             <div className="input2">
                 <div>
@@ -135,15 +141,10 @@ class Home extends Component {
                 </div>
                 <div>
                     <p style={{position: "absolute", left: 700, top: 310}} >please input PIN number : </p>
-                    <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} />
                     <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} style={{position: "absolute", left: 900, top: 325}} />
                 </div>
             </div>
           );
-        } else if(this.state.publicKey !== "") {
-            return(
-                <Board publicKey={this.state.publicKey}/>
-            )
         }
       }
 }
