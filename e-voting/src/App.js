@@ -13,6 +13,7 @@ class App extends Component {
     this._inputNumber = this._inputNumber.bind(this);
     this._inputBirth = this._inputBirth.bind(this);
     this._inputPIN = this._inputPIN.bind(this);
+    this._handlePIN = this._handlePIN.bind(this);
 
     this.state = {
       name : "",
@@ -54,14 +55,14 @@ class App extends Component {
     if(this.state.auth===false) {
       this._isAuthed(this.state.name, this.state.number, this.state.birth);
     } else {
-      this._handlePIN(this.state.pin)
+      this._handlePIN()
     }
   }
   
   _isAuthed(name, number, birth) {
     let isCert = false;
 
-    if(name!=="" && number!=="" && birth!==""){
+    if(name!=="" && number!=="" && birth!=="") {
       isCert = true;
     } else if(name==="" || number==="") {
       alert("hey missed any part!");
@@ -86,12 +87,20 @@ class App extends Component {
     })
   }
 
-  _handlePIN(pin) {
+  _handlePIN() {
+    let _private = sha256(this.state.hash1 + this.state.pin);
+    alert("Your PrivateKey : " + _private + " \n Be Safe!");
+    
+    this.setState({
+      privateKey : _private
+    })
+    // state 비동기 문제 잔존
 
+    console.log(this.state)
   }
 
   render() {
-    if(this.state.auth === false && this.state.pin === ""){
+    if(this.state.auth === false){
       return (
         <div className="App">
           <header className="App-header">
@@ -108,7 +117,7 @@ class App extends Component {
           </div>
         </div>
       );
-    } else if(this.state.auth === true && this.state.pin === ""){
+    } else if(this.state.auth === true){
       return (
         <div className="App">
           <header className="App-header">
@@ -129,12 +138,6 @@ class App extends Component {
           </div>
         </div>
       );
-    } else if(this.state.auth === true && this.state.pin !== "") {
-      return(
-        <div>
-
-        </div>
-      )
     }
   }
 }
