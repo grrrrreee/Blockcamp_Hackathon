@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+//import axios from 'axios';
 import sha256 from 'sha256';
 import '../App.css'
-import { Link } from 'react-router-dom';
 import Board from './Board'
 
 class Home extends Component {
@@ -24,7 +23,8 @@ class Home extends Component {
           auth : false,
           hash1 : 0,
           pin : "",
-          publicKey : ""
+          publicKey : "",
+          depart : ""
         };
       }
     
@@ -88,6 +88,14 @@ class Home extends Component {
           pin : _pin
         })
       }
+
+      _inputDepart(e){
+        let _depart = e.target.value;
+
+        this.setState({
+          depart : _depart
+        })
+      }
     
       _handlePIN() {
         let _public = sha256(this.state.hash1 + this.state.pin);
@@ -103,13 +111,13 @@ class Home extends Component {
             <div>
                 <div className="input1">
                 <div>
-                  <p className="h3" style={{position: "absolute", left: 700, top: 285}} >Name</p>
-                  <p className="h3" style={{position: "absolute", left: 700, top: 310}} >Student ID</p>
-                  <p className="h3" style={{position: "absolute", left: 700, top: 335}} >Birth</p>
-                    <input type="text" placeholder="ENG" style={{position: "absolute", right: 740, top: 300}}onChange={(e)=> {this._inputName(e)}}/>
-                    <input type="text" placeholder="number" style={{position: "absolute", right: 740, top: 325}} onChange={(e) => {this._inputNumber(e)}}/>
-                    <input type="text" placeholder="YYYYMMDD" style={{position: "absolute", right: 740, top: 350}} onChange={(e)=>{this._inputBirth(e)}}/>
-                    <input type="button" value="Submit" className= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", right: 755, top: 380}}/>
+                  <p className="h3" style={{position: "absolute", left: 550, top: 225}} >Name</p>
+                  <p className="h3" style={{position: "absolute", left: 550, top: 325}} >Student ID</p>
+                  <p className="h3" style={{position: "absolute", left: 550, top: 425}} >Birth</p>
+                    <input type="text" class="form-control" placeholder="ENG" style={{position: "absolute", left: 760, top: 235}}onChange={(e)=> {this._inputName(e)}}/>
+                    <input type="text" class="form-control" placeholder="number" style={{position: "absolute", left: 760, top: 335}} onChange={(e) => {this._inputNumber(e)}}/>
+                    <input type="text" class="form-control" placeholder="YYYYMMDD" style={{position: "absolute", left: 760, top: 435}} onChange={(e)=>{this._inputBirth(e)}}/>
+                    <input type="button" value="Submit" className= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", left: 765, top: 570}}/>
                 </div>
                 </div>
                 
@@ -119,21 +127,23 @@ class Home extends Component {
           return (
             <div className="input2">
                 <div>
-                    <p className="h3" style={{position: "absolute", left: 580, top: 255}} >You are certified!</p>
+                    <p className="h3" style={{position: "absolute", left: 420, top: 175}} >You are certified!</p>
                 </div>
                 <div>
-                <p className="h3" style={{position: "absolute", left: 580, top: 285}} >Your first hash: {this.state.hash1}</p>
+                <p className="h3" style={{position: "absolute", left: 420, top: 205}} >Your first hash: {this.state.hash1}</p>
                 </div>
                 <div>
-                    <p className="h3" style={{position: "absolute", left: 582, top: 340}} >please input PIN number : </p>
-                    <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} style={{position: "absolute", left: 785, top: 357}} />
-                    <input type="button" value="Submit" className= "btn btn-primary btn-lg" style={{position: "absolute", left: 780, top: 415}} onClick={this._handleSubmit}/>
+                    <p className="h3" style={{position: "absolute", left: 420, top: 365}} >please input PIN number : </p>
+                    <input type="text" class="form-control" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} style={{position: "absolute", left: 885, top: 380}} />
+                    <p className="h3" style={{position: "absolute", left: 420, top: 450}} >Depart : </p>
+                    <input type="text" class="form-control" placeholder="Depart" onChange={(e)=>{this._inputDepart(e)}} style={{position: "absolute", left: 885, top: 455}} />
+                    <input type="button" className= "btn btn-primary btn-lg" value="Submit" style={{position: "absolute", left: 765, top: 570}} onClick={this._handleSubmit}/>
                 </div>
             </div>
           );
         } else if(this.state.publicKey !== "") {
           return(
-            <Board publicKey={this.state.publicKey}/>
+            <Board publicKey={this.state.publicKey} depart={this.state.depart} />
           )
         }
       }
