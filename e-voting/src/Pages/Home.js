@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+//import axios from 'axios';
 import sha256 from 'sha256';
 import '../App.css'
-import { Link } from 'react-router-dom';
 import Board from './Board'
 
 class Home extends Component {
@@ -24,7 +23,8 @@ class Home extends Component {
           auth : false,
           hash1 : 0,
           pin : "",
-          publicKey : ""
+          publicKey : "",
+          depart : ""
         };
       }
     
@@ -88,6 +88,14 @@ class Home extends Component {
           pin : _pin
         })
       }
+
+      _inputDepart(e){
+        let _depart = e.target.value;
+
+        this.setState({
+          depart : _depart
+        })
+      }
     
       _handlePIN() {
         let _public = sha256(this.state.hash1 + this.state.pin);
@@ -125,15 +133,17 @@ class Home extends Component {
                 <p style={{position: "absolute", left: 680, top: 285}} >Your first hash: {this.state.hash1}</p>
                 </div>
                 <div>
-                    <p style={{position: "absolute", left: 680, top: 310}} >please input PIN number : </p>
-                    <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} style={{position: "absolute", left: 880, top: 325}} />
-                    <input type="button" value="Submit" className= "btn btn-primary btn-lg" style={{position: "absolute", left: 880, top: 355}} onClick={this._handleSubmit}/>
+                    <p style={{position: "absolute", left: 700, top: 310}} >please input PIN number : </p>
+                    <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} style={{position: "absolute", left: 900, top: 325}} />
+                    <p style={{position: "absolute", left: 700, top: 410}} >Depart : </p>
+                    <input type="text" placeholder="Depart" onChange={(e)=>{this._inputDepart(e)}} style={{position: "absolute", left: 900, top: 425}} />
+                    <input type="button" value="Submit" onClick={this._handleSubmit}/>
                 </div>
             </div>
           );
         } else if(this.state.publicKey !== "") {
           return(
-            <Board publicKey={this.state.publicKey}/>
+            <Board publicKey={this.state.publicKey} depart={this.state.depart} />
           )
         }
       }
