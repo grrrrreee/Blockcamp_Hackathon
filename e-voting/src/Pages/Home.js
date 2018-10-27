@@ -114,10 +114,10 @@ class Home extends Component {
                   <p style={{position: "absolute", left: 700, top: 285}} >Name</p>
                   <p style={{position: "absolute", left: 700, top: 310}} >PIN</p>
                   <p style={{position: "absolute", left: 700, top: 335}} >Student ID</p>
-                    <input type="text" placeholder="ENG" style={{position: "absolute", left: 800, top: 300}}onChange={(e)=> {this._inputName(e)}}/>
+                    <input type="text" placeholder="ENG" style={{position: "absolute", left: 0, top: 300}}onChange={(e)=> {this._inputName(e)}}/>
                     <input type="text" style={{position: "absolute", left: 800, top: 325}} onChange={(e) => {this._inputNumber(e)}}/>
                     <input type="text" placeholder="19960318" style={{position: "absolute", left: 800, top: 350}} onChange={(e)=>{this._inputBirth(e)}}/>
-                    <input type="button" value="Submit" class= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", left: 805, top: 380}}/>
+                    <input type="button" value="Submit" class= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", left: 775, top: 380}}/>
                 </div>
                 </div>
             </div>
@@ -141,6 +141,7 @@ class Home extends Component {
                 </div>
                 <div>
                     <p style={{position: "absolute", left: 700, top: 310}} >please input PIN number : </p>
+                    <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} />
                     <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} style={{position: "absolute", left: 900, top: 325}} />
                 </div>
             </div>
