@@ -105,10 +105,13 @@ class Home extends Component {
             <div>
                 <div className="input1">
                 <div>
-                    Eng Name : <input type="text" placeholder="ENG" onChange={(e)=> {this._inputName(e)}}/>
-                    ID Number : <input type="text" onChange={(e) => {this._inputNumber(e)}}/>
-                    birth : <input type="text" placeholder="19960318" onChange={(e)=>{this._inputBirth(e)}}/>
-                    <input type="button" value="Submit" onClick={this._handleSubmit} />
+                  <p style={{position: "absolute", left: 700, top: 285}} >Name</p>
+                  <p style={{position: "absolute", left: 700, top: 310}} >PIN</p>
+                  <p style={{position: "absolute", left: 700, top: 335}} >Student ID</p>
+                    <input type="text" placeholder="ENG" style={{position: "absolute", right: 740, top: 300}}onChange={(e)=> {this._inputName(e)}}/>
+                    <input type="text" style={{position: "absolute", right: 740, top: 325}} onChange={(e) => {this._inputNumber(e)}}/>
+                    <input type="text" placeholder="19960318" style={{position: "absolute", right: 740, top: 350}} onChange={(e)=>{this._inputBirth(e)}}/>
+                    <input type="button" value="Submit" class= "btn btn-primary btn-lg" onClick={this._handleSubmit} style={{position: "absolute", right: 755, top: 380}}/>
                 </div>
                 </div>
             </div>
@@ -117,14 +120,23 @@ class Home extends Component {
           return (
             <div className="input2">
                 <div>
-                    You are certified!
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/board">Board</Link></li>
+                        <li><Link to="/about/foo">About Foo</Link></li>
+                    </ul>
+                    <hr/>
                 </div>
                 <div>
-                    Your first hash : {this.state.hash1}
+                    <p style={{position: "absolute", left: 700, top: 255}} >You are certified!</p>
                 </div>
                 <div>
-                    please input PIN number : <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} />
-                    <input type="button" value="Submit" onClick={this._handleSubmit} />
+                <p style={{position: "absolute", left: 700, top: 285}} >Your first hash: {this.state.hash1}</p>
+                </div>
+                <div>
+                    <p style={{position: "absolute", left: 700, top: 310}} >please input PIN number : </p>
+                    <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} />
+                    <input type="text" placeholder="4 digits" onChange={(e)=>{this._inputPIN(e)}} style={{position: "absolute", left: 900, top: 325}} />
                 </div>
             </div>
           );
