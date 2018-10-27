@@ -138,6 +138,7 @@ class Home extends Component {
                     <p className="h3" style={{position: "absolute", left: 420, top: 450}} >Depart : </p>
                     <input type="text" class="form-control" placeholder="Depart" onChange={(e)=>{this._inputDepart(e)}} style={{position: "absolute", left: 885, top: 455}} />
                     <input type="button" className= "btn btn-primary btn-lg" value="Submit" style={{position: "absolute", left: 765, top: 570}} onClick={this._handleSubmit}/>
+
                 </div>
             </div>
           );
