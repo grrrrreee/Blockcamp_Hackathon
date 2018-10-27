@@ -4,9 +4,13 @@ import { BrowserRouter } from 'react-router-dom';
 class Board extends Component {
     constructor(props) {
         super(props);
-    
+        
         this.state = {
         };
+    }
+
+    componentDidMount(){
+        
     }
 
     render() {
