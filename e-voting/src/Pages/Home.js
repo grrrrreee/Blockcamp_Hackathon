@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import sha256 from 'sha256';
 import '../App.css'
 import { Link } from 'react-router-dom';
+import Board from './Board'
 
 class Home extends Component {
     constructor(props) {
@@ -15,7 +16,6 @@ class Home extends Component {
         this._inputBirth = this._inputBirth.bind(this);
         this._inputPIN = this._inputPIN.bind(this);
         this._handlePIN = this._handlePIN.bind(this);
-        //this._redirect = this
     
         this.state = {
           name : "",
@@ -24,7 +24,7 @@ class Home extends Component {
           auth : false,
           hash1 : 0,
           pin : "",
-          privateKey : ""
+          publicKey : ""
         };
       }
     
@@ -90,21 +90,13 @@ class Home extends Component {
       }
     
       _handlePIN() {
-        let _private = sha256(this.state.hash1 + this.state.pin);
-        alert("Your PrivateKey : " + _private + " \n Be Safe!");
+        let _public = sha256(this.state.hash1 + this.state.pin);
         
         this.setState({
-          privateKey : _private
+          publicKey : _public
         })
-        // state 비동기 문제 잔존
-    
-        console.log(this.state)
       }
 
-      _redirect() {
-          return 
-      }
-    
       render() {
         if(this.state.auth === false){
           return (
@@ -122,16 +114,9 @@ class Home extends Component {
                 </div>
             </div>
           );
-        } else if(this.state.auth === true){
+        } else if(this.state.auth === true && this.state.publicKey === ""){
           return (
             <div className="input2">
-                <div>
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/board">Board</Link></li>
-                    </ul>
-                    <hr/>
-                </div>
                 <div>
                     <p style={{position: "absolute", left: 700, top: 255}} >You are certified!</p>
                 </div>
@@ -145,6 +130,10 @@ class Home extends Component {
                 </div>
             </div>
           );
+        } else if(this.state.publicKey !== "") {
+          return(
+            <Board publicKey={this.state.publicKey}/>
+          )
         }
       }
 }
